@@ -12,36 +12,20 @@ import datetime
 import os
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = int(os.environ.get('MAX_CONTENT_LENGTH', 16 * 1024 * 1024))
 
-# -------------------------------------------------------------------------
-# CORS / DEPLOYMENT CONFIGURATION
-# -------------------------------------------------------------------------
-# GitHub Pages is a static host, so this Flask app must run on a separate
-# backend host such as Render/Railway/Fly.io/PythonAnywhere.
-#
-# Add your deployed frontend origin here. The origin is only scheme + domain;
-# do not include a path after github.io.
-DEFAULT_ALLOWED_ORIGINS = [
-    "https://faisal-r2.github.io",
-    "http://127.0.0.1:5500",
-    "http://localhost:5500",
-    "http://127.0.0.1:5000",
-    "http://localhost:5000",
+# CORS for GitHub Pages + local testing.
+# For file:// local testing, browsers may send Origin: null, so "null" is included.
+FRONTEND_ORIGINS = [
+    origin.strip()
+    for origin in os.environ.get(
+        'FRONTEND_ORIGINS',
+        'https://faisal-r2.github.io,http://127.0.0.1:5500,http://localhost:5500,http://127.0.0.1:5000,http://localhost:5000,null'
+    ).split(',')
+    if origin.strip()
 ]
 
-# Optional: override/extend origins in your hosting dashboard with:
-# ALLOWED_ORIGINS=https://your-page.github.io,https://your-custom-domain.com
-extra_origins = os.environ.get("ALLOWED_ORIGINS", "")
-ALLOWED_ORIGINS = DEFAULT_ALLOWED_ORIGINS + [
-    origin.strip() for origin in extra_origins.split(",") if origin.strip()
-]
-
-CORS(
-    app,
-    resources={r"/*": {"origins": ALLOWED_ORIGINS}},
-    supports_credentials=False,
-)
-
+CORS(app, resources={r"/*": {"origins": FRONTEND_ORIGINS}})
 
 # -------------------------------------------------------------------------
 # DATABASE SETUP & INITIALIZATION
@@ -83,24 +67,19 @@ def init_db():
 init_db()
 
 # -------------------------------------------------------------------------
-# HEALTH CHECK / BASIC API ROUTES
+# HEALTH CHECK ROUTES
 # -------------------------------------------------------------------------
-
 @app.route('/', methods=['GET'])
-def index():
+def home():
     return jsonify({
         "status": "ok",
         "service": "SoCl Embroidery Backend",
-        "message": "Backend is running. Connect your GitHub Pages frontend to this backend URL."
+        "message": "Backend is running. Use /health to check status."
     }), 200
 
 @app.route('/health', methods=['GET'])
 def health():
-    return jsonify({
-        "status": "ok",
-        "database": DB_FILE,
-        "time": datetime.datetime.utcnow().isoformat() + "Z"
-    }), 200
+    return jsonify({"status": "ok"}), 200
 
 # -------------------------------------------------------------------------
 # AUTHENTICATION & TRACKING API ENDPOINTS
@@ -112,89 +91,62 @@ def register():
     name = (data.get('fullName') or '').strip()
     email = (data.get('email') or '').strip().lower()
     password = data.get('password') or ''
-
+    
     if not name or not email or not password:
         return jsonify({"error": "Missing required fields"}), 400
 
     hashed_pw = generate_password_hash(password, method='pbkdf2:sha256')
-
+    
     try:
         conn = sqlite3.connect(DB_FILE)
         cursor = conn.cursor()
-        cursor.execute(
-            "INSERT INTO users (full_name, email, password_hash) VALUES (?, ?, ?)",
-            (name, email, hashed_pw)
-        )
+        cursor.execute("INSERT INTO users (full_name, email, password_hash) VALUES (?, ?, ?)", 
+                       (name, email, hashed_pw))
         conn.commit()
         return jsonify({"message": "User created successfully"}), 201
     except sqlite3.IntegrityError:
         return jsonify({"error": "Email is already registered"}), 409
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
     finally:
-        try:
-            conn.close()
-        except Exception:
-            pass
+        conn.close()
 
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json(silent=True) or {}
     email = (data.get('email') or '').strip().lower()
     password = data.get('password') or ''
-
-    if not email or not password:
-        return jsonify({"error": "Missing email or password"}), 400
-
-    # Optional admin login for deployed backend.
-    # Set ADMIN_USERNAME and ADMIN_PASSWORD in your hosting dashboard.
-    admin_username = os.environ.get('ADMIN_USERNAME', '').strip().lower()
-    admin_password = os.environ.get('ADMIN_PASSWORD', '')
-    if admin_username and admin_password and email == admin_username and password == admin_password:
-        return jsonify({
-            "message": "Admin login successful",
-            "user": {"id": 0, "name": "Admin", "email": admin_username, "role": "admin"}
-        }), 200
-
+    
     conn = sqlite3.connect(DB_FILE)
     cursor = conn.cursor()
     cursor.execute("SELECT id, full_name, password_hash FROM users WHERE email = ?", (email,))
     user = cursor.fetchone()
     conn.close()
-
+    
     if user and check_password_hash(user[2], password):
         return jsonify({
             "message": "Login successful",
             "user": {"id": user[0], "name": user[1], "email": email}
         }), 200
-
-    return jsonify({"error": "Invalid email or password"}), 401
+    else:
+        return jsonify({"error": "Invalid email or password"}), 401
 
 @app.route('/track-event', methods=['POST'])
 def track_event():
     data = request.get_json(silent=True) or {}
     user_id = data.get('userId')
     event_type = data.get('eventType')
-    event_data = json.dumps(data.get('eventData', {}))
-
-    if user_id is not None and event_type:
-        try:
-            conn = sqlite3.connect(DB_FILE)
-            cursor = conn.cursor()
-            cursor.execute('''
-                INSERT INTO event_logs (user_id, event_type, event_data)
-                VALUES (?, ?, ?)
-            ''', (user_id, event_type, event_data))
-            conn.commit()
-            return jsonify({"status": "logged"}), 200
-        except Exception as e:
-            return jsonify({"error": str(e)}), 500
-        finally:
-            try:
-                conn.close()
-            except Exception:
-                pass
-
+    event_data = json.dumps(data.get('eventData', {})) 
+    
+    if user_id and event_type:
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO event_logs (user_id, event_type, event_data) 
+            VALUES (?, ?, ?)
+        ''', (user_id, event_type, event_data))
+        conn.commit()
+        conn.close()
+        return jsonify({"status": "logged"}), 200
+        
     return jsonify({"error": "Missing user or event type"}), 400
 
 

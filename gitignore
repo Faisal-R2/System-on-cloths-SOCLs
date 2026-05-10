@@ -1,0 +1,13 @@
+# SoCl backend generated/runtime files
+__pycache__/
+*.pyc
+.env
+wearlab.db
+*.db
+*.sqlite
+*.sqlite3
+
+# Local virtual environments
+venv/
+.env/
+.venv/
