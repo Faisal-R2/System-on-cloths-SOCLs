@@ -219,6 +219,613 @@
         .form-group input:focus { outline: none; border-color: var(--brand-accent); box-shadow: 0 0 0 2px rgba(229,114,0,0.2); }
         .modal-title { color: var(--brand-blue); margin-top: 0; margin-bottom: 20px; text-align: left;}
         
+        /* --- SOCL TECHNICAL PLATFORM LANDING UPGRADES --- */
+        .startup-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(229, 114, 0, 0.10);
+            color: var(--brand-accent);
+            border: 1px solid rgba(229, 114, 0, 0.25);
+            padding: 8px 14px;
+            border-radius: 999px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            margin-bottom: 18px;
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+        }
+
+        .hero-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(250px, 1fr));
+            gap: 16px;
+            max-width: 1180px;
+            margin: 60px auto 40px auto;
+        }
+
+        .metric-card {
+            background: #f8f9fa;
+            border: 1px solid #ecf0f1;
+            border-radius: 12px;
+            padding: 20px 18px;
+            text-align: center;
+            min-height: 105px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .metric-card strong {
+            display: block;
+            color: var(--brand-blue);
+            font-size: 1.08rem;
+            line-height: 1.25;
+            white-space: nowrap;
+        }
+
+        .metric-card span {
+            color: #6c757d;
+            font-size: 0.86rem;
+            line-height: 1.35;
+            margin-top: 8px;
+        }
+
+        .startup-section {
+            margin-top: 42px;
+            background: rgba(255, 255, 255, 0.94);
+            border-radius: 10px;
+            box-shadow: var(--card-shadow);
+            padding: 34px;
+            border: 1px solid #ecf0f1;
+        }
+
+        .startup-section h2 {
+            margin-top: 0;
+            color: var(--brand-blue);
+        }
+
+        .startup-section .section-subtitle {
+            max-width: 820px;
+            color: #6c757d;
+            margin-top: -5px;
+            margin-bottom: 24px;
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 18px;
+        }
+
+        .workflow-step {
+            position: relative;
+            background: #f8f9fa;
+            border: 1px solid #ecf0f1;
+            border-radius: 10px;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        .workflow-step .step-number {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--brand-accent);
+            color: var(--white);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .workflow-step h4 {
+            margin: 0 0 8px 0;
+            color: var(--brand-blue);
+        }
+
+        .workflow-step p {
+            margin: 0;
+            color: #6c757d;
+            font-size: 0.94rem;
+        }
+
+        .product-showcase {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 26px;
+            align-items: center;
+        }
+
+        .screenshot-frame {
+            background: #1a252f;
+            border-radius: 12px;
+            padding: 12px;
+            box-shadow: 0 18px 35px rgba(0,0,0,0.18);
+        }
+
+        .screenshot-toolbar {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+        }
+
+        .screenshot-toolbar span {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #bdc3c7;
+            display: block;
+        }
+
+        .screenshot-frame img {
+            width: 520px;
+            max-width: 100%;
+            height: auto;
+            object-fit: contain;
+            background: linear-gradient(135deg, #f8f9fa, #ecf0f1);
+            border-radius: 8px;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .preview-carousel {
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .preview-carousel-window {
+            position: relative;
+            min-height: 360px;
+            background: linear-gradient(135deg, #f8f9fa, #ecf0f1);
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-slide {
+            display: none;
+            width: 100%;
+            height: 100%;
+            min-height: 360px;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .preview-slide.active {
+            display: flex;
+        }
+
+        .preview-slide img {
+            width: 100%;
+            height: 360px;
+            object-fit: contain;
+            background: transparent;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .screenshot-placeholder {
+            display: none;
+            width: 100%;
+            min-height: 360px;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #6c757d;
+            font-size: 0.9rem;
+            padding: 18px;
+            box-sizing: border-box;
+            background: linear-gradient(135deg, #f8f9fa, #ecf0f1);
+            border-radius: 8px;
+        }
+
+        .preview-carousel-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-top: 10px;
+            flex-wrap: wrap;
+        }
+
+        .screenshot-caption {
+            color: #ecf0f1;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .preview-dots {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .preview-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(236, 240, 241, 0.45);
+            cursor: pointer;
+            padding: 0;
+            transition: all 0.25s ease;
+        }
+
+        .preview-dot.active,
+        .preview-dot:hover {
+            background: var(--brand-accent);
+            transform: scale(1.2);
+        }
+
+        .feature-list {
+            display: grid;
+            gap: 12px;
+            margin: 20px 0;
+        }
+
+        .feature-list div {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            color: #34495e;
+        }
+
+        .feature-list i {
+            color: var(--brand-accent);
+            margin-top: 4px;
+        }
+
+        .customer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .customer-card {
+            background: #f8f9fa;
+            border: 1px solid #ecf0f1;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .customer-card h4 {
+            color: var(--brand-blue);
+            margin-top: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .customer-card p {
+            color: #6c757d;
+            margin-bottom: 0;
+            font-size: 0.94rem;
+        }
+
+        .trust-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 14px;
+            margin-top: 18px;
+        }
+
+        .trust-item {
+            background: #f8f9fa;
+            border: 1px solid #ecf0f1;
+            border-radius: 10px;
+            padding: 16px;
+            text-align: center;
+            color: var(--brand-blue);
+            font-weight: 700;
+        }
+
+        .trust-item i {
+            display: block;
+            color: var(--brand-accent);
+            font-size: 1.6rem;
+            margin-bottom: 8px;
+        }
+
+        .early-access-box {
+            background: linear-gradient(135deg, var(--brand-blue), #1a252f);
+            color: var(--white);
+            border-radius: 12px;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1.3fr 0.7fr;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .early-access-box h2,
+        .early-access-box p {
+            color: var(--white);
+        }
+
+        .early-access-box p {
+            opacity: 0.86;
+            margin-bottom: 0;
+        }
+
+        .early-access-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .outline-light-btn {
+            background: transparent;
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.6);
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .outline-light-btn:hover {
+            background: rgba(255,255,255,0.12);
+        }
+
+
+
+        /* --- COMPONENT LIBRARY PAGE --- */
+        .component-entry-card {
+            cursor: pointer;
+            position: relative;
+        }
+
+        .component-entry-card:focus {
+            outline: 3px solid rgba(229, 114, 0, 0.35);
+            outline-offset: 3px;
+        }
+
+        .component-entry-footer {
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #ecf0f1;
+            color: var(--brand-blue);
+            border-radius: 6px;
+            padding: 10px 14px;
+            font-weight: 700;
+            transition: all 0.25s ease;
+        }
+
+        .component-entry-card:hover .component-entry-footer {
+            background: var(--brand-accent);
+            color: var(--white);
+        }
+
+        .component-page-shell {
+            background: rgba(255,255,255,0.96);
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid #e9ecef;
+            padding: 30px;
+        }
+
+        .component-page-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 18px;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 18px;
+            margin-bottom: 22px;
+        }
+
+        .component-page-header h2 {
+            color: var(--brand-blue);
+            margin: 0 0 8px 0;
+        }
+
+        .component-page-header p {
+            margin: 0;
+            color: #6c757d;
+            max-width: 820px;
+        }
+
+        .back-page-btn {
+            background: var(--brand-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            transition: 0.25s;
+        }
+
+        .back-page-btn:hover {
+            background: var(--brand-accent);
+        }
+
+        .component-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 18px 0 24px 0;
+        }
+
+        .component-tab {
+            border: 1px solid #dfe6e9;
+            background: #f8f9fa;
+            color: var(--brand-blue);
+            border-radius: 999px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.25s ease;
+        }
+
+        .component-tab:hover,
+        .component-tab.active {
+            background: var(--brand-accent);
+            color: var(--white);
+            border-color: var(--brand-accent);
+        }
+
+        .component-detail-page {
+            display: none;
+        }
+
+        .component-detail-page.active {
+            display: block;
+            animation: fadeIn 0.35s ease-in-out;
+        }
+
+        .component-detail-layout {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .component-visual-card,
+        .component-model-card {
+            background: #ffffff;
+            border: 1px solid #e9ecef;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: var(--card-shadow);
+        }
+
+        .component-image-slot {
+            width: 100%;
+            min-height: 250px;
+            background: #f8f9fa;
+            border: 1px dashed #bdc3c7;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            color: #6c757d;
+            margin-bottom: 14px;
+        }
+
+        .component-image-slot img {
+            width: 100%;
+            max-height: 280px;
+            object-fit: contain;
+            display: block;
+        }
+
+        .component-badge-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .component-badge {
+            background: #f1f3f5;
+            color: var(--brand-blue);
+            border-radius: 999px;
+            padding: 6px 10px;
+            font-size: 0.82rem;
+            font-weight: 700;
+        }
+
+        .component-equation-box {
+            background: #f8f9fa;
+            border-left: 5px solid var(--brand-accent);
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin: 14px 0;
+            font-size: 0.96rem;
+        }
+
+        .component-equation-box .equation {
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 1.12rem;
+            line-height: 1.85;
+            color: var(--brand-blue);
+        }
+
+        .component-parameter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .component-param {
+            background: #fbfbfc;
+            border: 1px solid #edf0f2;
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .component-param strong {
+            color: var(--brand-blue);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .component-note {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            color: #7c2d12;
+            border-radius: 8px;
+            padding: 12px 14px;
+            margin-top: 14px;
+        }
+
+        .component-page-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 24px;
+        }
+
+        .component-page-actions button {
+            border: none;
+            border-radius: 6px;
+            padding: 10px 16px;
+            cursor: pointer;
+            font-weight: 700;
+        }
+
+        .component-prev-btn {
+            background: #ecf0f1;
+            color: var(--brand-blue);
+        }
+
+        .component-next-btn {
+            background: var(--brand-accent);
+            color: var(--white);
+        }
+
+        .component-prev-btn:hover,
+        .component-next-btn:hover {
+            opacity: 0.9;
+        }
+
         /* --- RESPONSIVE POLISH --- */
         @media (max-width: 1100px) {
             nav {
@@ -239,6 +846,11 @@
                 flex-wrap: nowrap;
                 white-space: nowrap;
             }
+
+            .hero-metrics {
+                grid-template-columns: repeat(2, minmax(260px, 1fr));
+                max-width: 760px;
+            }
         }
 
         @media (max-width: 700px) {
@@ -248,6 +860,26 @@
             .btn-primary, .btn-secondary { width: 100%; margin: 8px 0 0 0 !important; box-sizing: border-box; }
             .eda-container { height: 78vh; }
             .contact-info { padding: 25px; }
+            .startup-section { padding: 22px; }
+            .product-showcase, .early-access-box { grid-template-columns: 1fr; }
+            .early-access-actions { justify-content: stretch; }
+            .outline-light-btn { width: 100%; }
+            .screenshot-frame img { width: 100%; max-width: 520px; }
+            .preview-carousel { max-width: 100%; }
+            .preview-carousel-window, .preview-slide, .screenshot-placeholder { min-height: 220px; }
+            .preview-slide img { height: 220px; }
+            .preview-carousel-footer { justify-content: center; text-align: center; }
+            .hero-metrics {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+                margin-top: 40px !important;
+                margin-bottom: 30px !important;
+            }
+            .metric-card strong { white-space: normal; }
+            .component-page-header, .component-detail-layout { grid-template-columns: 1fr; }
+            .component-page-header { flex-direction: column; }
+            .back-page-btn { width: 100%; justify-content: center; }
+            .component-page-shell { padding: 20px; }
         }
 
     </style>
@@ -268,10 +900,27 @@
                 <li><button class="nav-btn active" onclick="switchTab('home')"><i class="fas fa-home"></i> Home</button></li>
                 <li><button class="nav-btn" onclick="switchTab('thread')"><i class="fas fa-layer-group"></i> Thread Selection</button></li>
                 <li><button class="nav-btn" onclick="switchTab('apps')"><i class="fas fa-microchip"></i> Designed Prototypes</button></li>
-                <li><button class="nav-btn" onclick="switchTab('tool')"><i class="fas fa-drafting-compass"></i> EDA Tool</button></li>
-                <li><button class="nav-btn" onclick="switchTab('converter')"><i class="fas fa-image"></i> PNG to DST</button></li>
+                
+                <!-- PROTECTED ROUTES WITH LOCK ICON -->
+                <li><button class="nav-btn" onclick="requireAuth('tool')"><i class="fas fa-drafting-compass"></i> EDA Tool <i class="fas fa-lock" style="font-size: 0.75rem; margin-left: 2px;"></i></button></li>
+                <li><button class="nav-btn" onclick="requireAuth('converter')"><i class="fas fa-image"></i> PNG to DST <i class="fas fa-lock" style="font-size: 0.75rem; margin-left: 2px;"></i></button></li>
+                
                 <li><button class="nav-btn" onclick="switchTab('contact')"><i class="fas fa-envelope"></i> Contact</button></li>
             </ul>
+
+            <div class="nav-separator"></div>
+
+            <div class="external-icons">
+                <div class="dropdown">
+                    <button class="dropbtn" title="View Published Papers">
+                        <i class="fas fa-book-open" style="margin-right: 6px;"></i> Research
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="https://ieeexplore.ieee.org/abstract/document/11337587/" target="_blank"><strong>IEEE Paper</strong><br>Programmable Embroidered Biopotential Electrodes</a>
+                        <a href="https://ieeexplore.ieee.org/abstract/document/10614413" target="_blank"><strong>IEEE Paper</strong><br>Cloud Manufacturing for Embroidered Electronics</a>
+                    </div>
+                </div>
+            </div>
 
             <div class="nav-separator"></div>
             
@@ -281,42 +930,85 @@
 
     <section id="home" class="page-section active">
         <div class="hero">
-            <h1>SoCl: Embroidered Electronic System on Cloth</h1>
-            <h3>Designing embroidered electronic components and circuits directly on fabric.</h3>
-            <p>
-                SoCl transforms electrical specifications and conductive thread properties into manufacturable textile circuit geometries,
-                stitch-level toolpaths, and machine-ready embroidery files.
-            </p>
+            <div class="startup-kicker">
+                <i class="fas fa-microchip"></i>
+                <span>The Future of Embroidered Electronics Starts with SoCl</span>
+            </div>
 
-            <button class="btn-primary" onclick="handleSignIn()">
-                <i class="fas fa-sign-in-alt" style="margin-right: 5px;"></i> Sign In
-            </button>
-            <button class="btn-secondary" onclick="openSignUpModal()" style="margin-left: 10px;">
-                <i class="fas fa-user-plus" style="margin-right: 5px;"></i> Create Account
-            </button>
+            <h1>From Electronic Design to Embroidered Circuits on Cloth</h1>
+
+            <h3>
+                SoCl integrates passive components, electrodes, sensors, conductive traces, and textile circuit layouts
+                into one material-aware design platform for embroidered electronics.
+            </h3>
+
+            <p>
+                Create embroidered resistors, capacitors, inductors, electrodes, sensors, pads, and conductive routing
+                from electrical requirements and conductive-thread properties. SoCl connects circuit modeling,
+                fabric-compatible geometry generation, stitch-level toolpaths, and DST-ready embroidery workflows
+                to build the next generation of soft electronic systems.
+            </p>
+            
+            <div class="hero-actions">
+                <button class="btn-primary" onclick="requireAuth('tool')">
+                    <i class="fas fa-drafting-compass" style="margin-right: 5px;"></i> Sign in to access the EDA Tool
+                </button>
+                <button class="btn-secondary" onclick="openSignUpModal()">
+                    <i class="fas fa-user-plus" style="margin-right: 5px;"></i> Create Account
+                </button>
+                <button class="btn-secondary" onclick="openComponentLibrary()">
+                    <i class="fas fa-microchip" style="margin-right: 5px;"></i> Embroidered Component library
+                </button>
+            </div>
+			
+            <!-- Embroidered Target -->
+            <div class="hero-metrics" style="margin-top: 60px; margin-bottom: 40px;">
+                <div class="metric-card">
+                    <strong>Design Intelligence</strong>
+                    <span>material-aware models for embroidered components, sensors, and electrodes</span>
+                </div>
+
+                <div class="metric-card">
+                    <strong>Embroidery-Ready Output</strong>
+                    <span>DST stitch paths for direct textile circuit fabrication</span>
+                </div>
+
+                <div class="metric-card">
+                    <strong>Soft-Circuit Engineering</strong>
+                    <span>thread resistance, stitch geometry, and fabric constraints built in</span>
+                </div>
+
+                <div class="metric-card">
+                    <strong>Wearable Quality</strong>
+                    <span>washable, flexible, reusable smart-textile prototypes</span>
+                </div>
+            </div>
         </div>
 
+        <!-- Embroidered component button and modeling -->
         <div class="research-grid">
-            <div class="research-card">
+            <div class="research-card component-entry-card" onclick="openComponentLibrary()" role="button" tabindex="0" onkeydown="if(event.key === 'Enter' || event.key === ' ') openComponentLibrary();" style="display: flex; flex-direction: column;">
                 <h3 style="color: var(--brand-accent);">
                     <i class="fas fa-microchip"></i> Embroidered Component Library
                 </h3>
-                <p>
-                    SoCl introduces fabric-based components including embroidered resistors, capacitors, inductors,
-                    conductive traces, contact pads, electrodes, and transistor/IC interfaces.
+                <p style="margin-bottom: 20px;">
+                    Explore detailed embroidered resistor, capacitor, and inductor models with equations,
+                    design parameters, textile constraints, image slots, and SoCl calculation notes.
                 </p>
             </div>
-
+            
+            <!-- Material-Aware -->
             <div class="research-card">
                 <h3 style="color: var(--brand-accent);">
-                    <i class="fas fa-ruler-combined"></i> Material-Aware Design
+                    <i class="fas fa-ruler-combined"></i> Thread Material-Aware Design
                 </h3>
                 <p>
                     Conductive thread properties, stitch spacing, and textile substrate behavior are used to generate
                     manufacturable circuit geometries from target electrical specifications.
                 </p>
             </div>
-
+            
+            <!-- Toolpath generation -->
             <div class="research-card">
                 <h3 style="color: var(--brand-accent);">
                     <i class="fas fa-project-diagram"></i> Automated Toolpath Generation
@@ -326,7 +1018,8 @@
                     jumps, trims, and electrical isolation for machine-ready embroidery files.
                 </p>
             </div>
-
+            
+            <!-- Smart textile applications -->
             <div class="research-card">
                 <h3 style="color: var(--brand-accent);">
                     <i class="fas fa-tshirt"></i> Smart Textile Applications
@@ -336,6 +1029,302 @@
                     touch sensors, temperature sensors, and electrical stimulation electrodes.
                 </p>
             </div>
+        </div>
+
+        <div class="startup-section">
+            <h2><i class="fas fa-play-circle" style="margin-right: 10px; color: var(--brand-accent);"></i> SoCl Technical Preview</h2>
+            <p class="section-subtitle">
+                Two preview images rotate inside one window every 10 seconds. Keep both PNG files in the same folder as this HTML file.
+            </p>
+            <div class="product-showcase">
+                <div class="screenshot-frame preview-carousel" onmouseenter="stopPreviewCarousel()" onmouseleave="startPreviewCarousel()">
+                    <div class="screenshot-toolbar"><span></span><span></span><span></span></div>
+                    <div class="preview-carousel-window">
+                        <div class="preview-slide active" data-caption="SoCl EDA Workspace">
+                            <img src="SOCL-2-EDa.png" alt="SoCl EDA workspace embroidered circuit preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="screenshot-placeholder">Add PNG:<br><strong>SOCL-2-EDa.png</strong></div>
+                        </div>
+
+                        <div class="preview-slide" data-caption="Fabricated Embroidered Circuit">
+                            <img src="socl-eda-preview.png" alt="Fabricated embroidered circuit on cloth preview" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div class="screenshot-placeholder">Add PNG:<br><strong>socl-eda-preview.png</strong></div>
+                        </div>
+                    </div>
+                    <div class="preview-carousel-footer">
+                        <div class="screenshot-caption" id="previewCaption">SoCl EDA Workspace</div>
+                        <div class="preview-dots" aria-label="SoCl preview image controls">
+                            <button class="preview-dot active" type="button" aria-label="Show preview image 1" onclick="showPreviewSlide(0)"></button>
+                            <button class="preview-dot" type="button" aria-label="Show preview image 2" onclick="showPreviewSlide(1)"></button>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 style="color: var(--brand-blue); margin-top: 0;">A technical design environment for embroidered circuit fabrication</h3>
+                    <div class="feature-list">
+                        <div><i class="fas fa-check-circle"></i><span>Place embroidered resistors, capacitors, inductors, DIP footprints, and surface-mount packages.</span></div>
+                        <div><i class="fas fa-check-circle"></i><span>Route conductive textile traces on a selectable millimeter grid with orthogonal routing.</span></div>
+                        <div><i class="fas fa-check-circle"></i><span>Export saved layouts and send geometry toward embroidery-machine DST workflows.</span></div>
+                        <div><i class="fas fa-check-circle"></i><span>Use material parameters to connect electrical targets with stitchable, manufacturable geometry.</span></div>
+                    </div>
+                    <button class="btn-primary" onclick="requireAuth('tool')"><i class="fas fa-drafting-compass" style="margin-right: 6px;"></i> Open EDA Workspace</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="startup-section">
+            <h2><i class="fas fa-route" style="margin-right: 10px; color: var(--brand-accent);"></i> How SoCl Works</h2>
+            <p class="section-subtitle">
+                A technical workflow for turning electrical component targets into embroidered textile circuit geometry.
+            </p>
+            <div class="workflow-grid">
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <h4>Enter component target</h4>
+                    <p>Choose R, C, or L and enter values such as target resistance, finger count, finger length, spacing, permittivity, or coil turns.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <h4>Apply textile constraints</h4>
+                    <p>Use conductive-thread resistance, stitch width, stitch spacing, substrate permittivity, and fabrication limits.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <h4>Generate geometry</h4>
+                    <p>SoCl creates resistor meanders, interdigitated capacitor fingers, planar spiral inductors, pads, and routable connection points.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">4</div>
+                    <h4>Export for fabrication</h4>
+                    <p>Save the layout as an embroidered PCB design file or export geometry toward DST embroidery workflows.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="startup-section">
+            <h2><i class="fas fa-users" style="margin-right: 10px; color: var(--brand-accent);"></i> Built For Technical Users</h2>
+            <p class="section-subtitle">
+                SoCl is positioned for teams that need repeatable textile-electronics design, geometry generation, and fabrication-ready outputs.
+            </p>
+            <div class="customer-grid">
+                <div class="customer-card">
+                    <h4><i class="fas fa-flask"></i> Research Labs</h4>
+                    <p>Prototype and compare embroidered electrodes, sensors, passive components, and textile circuit layouts faster.</p>
+                </div>
+                <div class="customer-card">
+                    <h4><i class="fas fa-heartbeat"></i> Wearable Health</h4>
+                    <p>Develop ECG, EMG, electrical-stimulation, and biosignal textile interfaces with repeatable embroidered geometry.</p>
+                </div>
+                <div class="customer-card">
+                    <h4><i class="fas fa-industry"></i> Smart Textile Teams</h4>
+                    <p>Bridge electrical design, material selection, digitizing, and embroidery fabrication for scalable workflows.</p>
+                </div>
+                <div class="customer-card">
+                    <h4><i class="fas fa-graduation-cap"></i> Education</h4>
+                    <p>Teach soft electronics, e-textile CAD, passive-component modeling, and embroidery manufacturing with a visual tool.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="startup-section">
+            <h2><i class="fas fa-shield-alt" style="margin-right: 10px; color: var(--brand-accent);"></i> Our Contribution & Research Trust</h2>
+            <p class="section-subtitle">
+                Connect the SoCl engineering workflow with research validation, textile fabrication, and smart-garment applications.
+            </p>
+            <div class="trust-strip">
+                <div class="trust-item"><i class="fas fa-university"></i> UVA WEARLab</div>
+                <div class="trust-item"><i class="fas fa-file-alt"></i> IEEE-linked research</div>
+                <div class="trust-item"><i class="fas fa-tshirt"></i> Smart textile focus</div>
+                <div class="trust-item"><i class="fas fa-cogs"></i> Fabrication workflow</div>
+            </div>
+        </div>
+
+        <div class="startup-section" style="padding: 0; border: none; box-shadow: none; background: transparent;">
+            <div class="early-access-box">
+                <div>
+                    <h2 style="margin-top: 0;"><i class="fas fa-envelope-open-text" style="margin-right: 10px; color: var(--brand-accent);"></i> Ready for technical evaluation and collaboration</h2>
+                    <p>
+                        Use this call-to-action for research labs, textile manufacturers, medical wearable teams, and smart-textile groups
+                        that want early access, validation collaboration, or a private technical demo.
+                    </p>
+                </div>
+                <div class="early-access-actions">
+                    <button class="btn-primary" onclick="openSignUpModal()"><i class="fas fa-user-plus" style="margin-right: 6px;"></i> Create Account</button>
+                    <button class="outline-light-btn" onclick="switchTab('contact')"><i class="fas fa-envelope" style="margin-right: 6px;"></i> Contact Team</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="componentLibrary" class="page-section">
+        <div class="component-page-shell">
+            <div class="component-page-header">
+                <div>
+                    <h2><i class="fas fa-microchip" style="margin-right: 10px; color: var(--brand-accent);"></i> Embroidered Component Library</h2>
+                    <p>
+                        A page-based technical reference for SoCl embroidered passive components. Start with the resistor page,
+                        then move through capacitor and inductor models. Each page connects the electrical equation, textile
+                        parameters, fabrication constraints, and the calculation used by the SoCl design workflow.
+                    </p>
+                </div>
+                <button class="back-page-btn" onclick="switchTab('home')">
+                    <i class="fas fa-arrow-left"></i> Back to Main Page
+                </button>
+            </div>
+
+            <div class="component-tabs" aria-label="Embroidered component model navigation">
+                <button class="component-tab active" data-component-tab="resistor" onclick="showComponentModel('resistor')"><i class="fas fa-wave-square"></i> 1. Resistor</button>
+                <button class="component-tab" data-component-tab="capacitor" onclick="showComponentModel('capacitor')"><i class="fas fa-align-justify"></i> 2. Capacitor</button>
+                <button class="component-tab" data-component-tab="inductor" onclick="showComponentModel('inductor')"><i class="fas fa-border-all"></i> 3. Inductor</button>
+            </div>
+
+            <article id="component-resistor" class="component-detail-page active">
+                <div class="component-detail-layout">
+                    <div class="component-visual-card">
+                        <h3 style="margin-top: 0; color: var(--brand-blue);">Embroidered Resistor</h3>
+                        <div class="component-image-slot">
+                            <img src="images/embroidered-resistor-model.png" alt="Embroidered resistor model image" onerror="this.style.display='none'; this.parentElement.innerHTML='Add PNG image here:<br><strong>images/embroidered-resistor-model.png</strong>';">
+                        </div>
+                        <p>
+                            An embroidered resistor is created by stitching a long conductive-thread path on cloth. The resistance is mainly controlled by the thread linear resistance and total stitched length. A meander shape is useful because it fits a long thread path into a compact textile area.
+                        </p>
+                        <div class="component-badge-row">
+                            <span class="component-badge">Meander geometry</span>
+                            <span class="component-badge">Length-controlled R</span>
+                            <span class="component-badge">Conductive thread</span>
+                        </div>
+                    </div>
+
+                    <div class="component-model-card">
+                        <h3 style="margin-top: 0; color: var(--brand-blue);">Mathematical model and SoCl calculation</h3>
+                        <p>
+                            For SoCl, the parameter named <strong>rho</strong> should be interpreted as <strong>linear thread resistance</strong>, R<sub>L</sub>, in &Omega;/m. It is not bulk resistivity. The target resistance is converted into the total stitched length needed for the embroidered path.
+                        </p>
+                        <div class="component-equation-box">
+                            <strong>Electrical model</strong>
+                            <div class="equation">
+                                R = R<sub>L</sub>L<sub>thread</sub><br>
+                                L<sub>thread</sub> = R<sub>target</sub> / R<sub>L</sub><br>
+                                P = I<sup>2</sup>R = V<sup>2</sup>/R
+                            </div>
+                        </div>
+                        <div class="component-parameter-grid">
+                            <div class="component-param"><strong>R<sub>target</sub></strong> Desired resistance in ohms (&Omega;).</div>
+                            <div class="component-param"><strong>R<sub>L</sub></strong> Linear resistance of conductive thread in &Omega;/m.</div>
+                            <div class="component-param"><strong>L<sub>thread</sub></strong> Total stitched conductor length in meters.</div>
+                            <div class="component-param"><strong>w / stitch width</strong> Affects routing area, current capacity, and fabrication tolerance.</div>
+                            <div class="component-param"><strong>Pad geometry</strong> Defines electrical connection area for clips, snaps, traces, or stitched interconnects.</div>
+                            <div class="component-param"><strong>Textile factors</strong> Stitch density, tension, washing, bending, humidity, and fabric compression can shift the final measured R.</div>
+                        </div>
+                        <div class="component-note">
+                            <strong>SoCl code relation:</strong> <code>total_length_mm = (R_target / R_L) * 1000</code>. Increasing stitched length increases resistance; using a lower-&Omega;/m thread decreases resistance.
+                        </div>
+                    </div>
+                </div>
+                <div class="component-page-actions">
+                    <button class="component-prev-btn" onclick="switchTab('home')"><i class="fas fa-arrow-left"></i> Back to Main Page</button>
+                    <button class="component-next-btn" onclick="showComponentModel('capacitor')">Next: Capacitor <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </article>
+
+            <article id="component-capacitor" class="component-detail-page">
+                <div class="component-detail-layout">
+                    <div class="component-visual-card">
+                        <h3 style="margin-top: 0; color: var(--brand-blue);">Embroidered Capacitor</h3>
+                        <div class="component-image-slot">
+                            <img src="images/embroidered-capacitor-model.png" alt="Embroidered capacitor model image" onerror="this.style.display='none'; this.parentElement.innerHTML='Add PNG image here:<br><strong>images/embroidered-capacitor-model.png</strong>';">
+                        </div>
+                        <p>
+                            An embroidered capacitor can be made as an interdigitated planar structure. Neighboring conductive fingers act as electrodes, and the textile/substrate region between them behaves as the dielectric path.
+                        </p>
+                        <div class="component-badge-row">
+                            <span class="component-badge">Interdigitated fingers</span>
+                            <span class="component-badge">pF estimate</span>
+                            <span class="component-badge">Fabric dielectric</span>
+                        </div>
+                    </div>
+
+                    <div class="component-model-card">
+                        <h3 style="margin-top: 0; color: var(--brand-blue);">Mathematical model and SoCl calculation</h3>
+                        <p>
+                            Capacitance increases with the number of neighboring finger pairs, finger overlap length, effective conductor width, and substrate relative permittivity. It decreases when the finger spacing increases.
+                        </p>
+                        <div class="component-equation-box" style="border-left-color: #0d6efd;">
+                            <strong>Interdigitated capacitor estimate</strong>
+                            <div class="equation">
+                                w<sub>eff</sub> = 2w + s<br>
+                                C &asymp; &epsilon;<sub>0</sub>&epsilon;<sub>r</sub>[(w<sub>eff</sub>L)/s](N - 1)<br>
+                                C<sub>pF</sub> &asymp; 0.008854187817 &epsilon;<sub>r</sub>[(2w + s)L/s](N - 1)
+                            </div>
+                        </div>
+                        <div class="component-parameter-grid">
+                            <div class="component-param"><strong>N</strong> Number of interdigitated fingers. More fingers create more adjacent electrode pairs.</div>
+                            <div class="component-param"><strong>L</strong> Finger overlap length in millimeters.</div>
+                            <div class="component-param"><strong>w</strong> Conductive stitch or thread width in millimeters.</div>
+                            <div class="component-param"><strong>s</strong> Gap between neighboring fingers in millimeters.</div>
+                            <div class="component-param"><strong>&epsilon;<sub>r</sub></strong> Relative permittivity of fabric/substrate region.</div>
+                            <div class="component-param"><strong>&epsilon;<sub>0</sub></strong> Vacuum permittivity, 8.854&times;10<sup>-12</sup> F/m.</div>
+                        </div>
+                        <div class="component-note">
+                            <strong>SoCl calculation check:</strong> when geometry is entered in millimeters and output is pF, use <code>0.008854187817</code>. Using <code>8.854</code> would make the displayed capacitance about 1000&times; too large.
+                        </div>
+                    </div>
+                </div>
+                <div class="component-page-actions">
+                    <button class="component-prev-btn" onclick="showComponentModel('resistor')"><i class="fas fa-arrow-left"></i> Previous: Resistor</button>
+                    <button class="component-next-btn" onclick="showComponentModel('inductor')">Next: Inductor <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </article>
+
+            <article id="component-inductor" class="component-detail-page">
+                <div class="component-detail-layout">
+                    <div class="component-visual-card">
+                        <h3 style="margin-top: 0; color: var(--brand-blue);">Embroidered Inductor</h3>
+                        <div class="component-image-slot">
+                            <img src="images/embroidered-inductor-model.png" alt="Embroidered inductor model image" onerror="this.style.display='none'; this.parentElement.innerHTML='Add PNG image here:<br><strong>images/embroidered-inductor-model.png</strong>';">
+                        </div>
+                        <p>
+                            An embroidered inductor is modeled as a planar square spiral. The turn count, average diameter, trace width, and spacing control the magnetic field path and therefore the inductance.
+                        </p>
+                        <div class="component-badge-row">
+                            <span class="component-badge">Square spiral</span>
+                            <span class="component-badge">Wheeler model</span>
+                            <span class="component-badge">nH estimate</span>
+                        </div>
+                    </div>
+
+                    <div class="component-model-card">
+                        <h3 style="margin-top: 0; color: var(--brand-blue);">Mathematical model and SoCl calculation</h3>
+                        <p>
+                            The square-spiral inductor uses a modified Wheeler-style approximation. The important unit check is that d<sub>avg</sub> must be converted from millimeters to meters before calculating inductance in henries.
+                        </p>
+                        <div class="component-equation-box" style="border-left-color: #4f46e5;">
+                            <strong>Modified Wheeler square-spiral model</strong>
+                            <div class="equation">
+                                L = [2.34&mu;<sub>0</sub>N<sup>2</sup>d<sub>avg</sub>] / [1 + 2.75&rho;<sub>fill</sub>]<br>
+                                d<sub>out</sub> = d<sub>in</sub> + 2[Nw + (N - 1)s]<br>
+                                d<sub>avg</sub> = (d<sub>out</sub> + d<sub>in</sub>)/2<br>
+                                &rho;<sub>fill</sub> = (d<sub>out</sub> - d<sub>in</sub>)/(d<sub>out</sub> + d<sub>in</sub>)
+                            </div>
+                        </div>
+                        <div class="component-parameter-grid">
+                            <div class="component-param"><strong>N</strong> Number of spiral turns.</div>
+                            <div class="component-param"><strong>w</strong> Conductive thread/trace width in millimeters.</div>
+                            <div class="component-param"><strong>s</strong> Spacing between neighboring spiral turns in millimeters.</div>
+                            <div class="component-param"><strong>d<sub>in</sub></strong> Inner square opening or inner diameter in millimeters.</div>
+                            <div class="component-param"><strong>d<sub>avg</sub></strong> Average diameter; convert mm to m for the H calculation.</div>
+                            <div class="component-param"><strong>&mu;<sub>0</sub></strong> Free-space permeability, 4&pi;&times;10<sup>-7</sup> H/m.</div>
+                        </div>
+                        <div class="component-note">
+                            <strong>SoCl calculation check:</strong> compute <code>d_avg_m = d_avg_mm / 1000</code>, calculate <code>L_henries</code>, then display <code>L_nH = L_henries * 1e9</code>. More turns and larger average diameter increase inductance, but also increase series resistance and parasitic capacitance.
+                        </div>
+                    </div>
+                </div>
+                <div class="component-page-actions">
+                    <button class="component-prev-btn" onclick="showComponentModel('capacitor')"><i class="fas fa-arrow-left"></i> Previous: Capacitor</button>
+                    <button class="component-next-btn" onclick="switchTab('home')"><i class="fas fa-check-circle"></i> Finish / Back to Main Page</button>
+                </div>
+            </article>
         </div>
     </section>
 
@@ -430,13 +1419,23 @@
     <section id="apps" class="page-section">
         <h2 class="section-header"><i class="fas fa-microchip" style="margin-right: 10px;"></i> Prototyping Applications</h2>
         <div class="app-grid">
+            
+            <div class="app-card">
+                <div class="app-icon"><i class="fas fa-circle-notch"></i></div>
+                <h4>Electrode</h4>
+                <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 15px;"> Open-source embroidered electrodes for biopotential monitoring.</p>
+                <div style="display: flex; gap: 10px; justify-content: center; margin-top: auto;">
+                    <a href="https://github.com/Faisal-R2/Programmable-Embroidered-Biopotential-Electrodes" target="_blank" class="app-link-btn" title="GitHub Repository"><i class="fab fa-github"></i>GitHub</a>
+                </div>
+            </div>
+
             <div class="app-card">
                 <div class="app-icon"><i class="fas fa-wave-square"></i></div>
                 <h4>ECG & EMG</h4>
                 <p style="font-size: 0.9rem; color: #7f8c8d; margin-bottom: 15px;">Biopotential monitoring for cardiac and muscular activity.</p>
                 <div style="display: flex; gap: 10px; justify-content: center; margin-top: auto;">
                     <a href="https://ieeexplore.ieee.org/abstract/document/11337587" target="_blank" class="app-link-btn" title="IEEE Paper"><i class="fas fa-file-pdf"></i> Paper</a>
-                    <a href="https://github.com/Faisal-R2/Programmable-Embroidered-Biopotential-Electrodes" target="_blank" class="app-link-btn" title="GitHub Repository"><i class="fab fa-github"></i> GitHub</a>
+                    
                 </div>
             </div>
             <div class="app-card">
@@ -607,10 +1606,11 @@
         <p>&copy; 2026 Wearable Lab. University of Virginia.</p>
     </footer>
 
+    <!-- SIGN UP MODAL -->
     <div class="modal-overlay" id="signupModal">
         <div class="modal-content">
             <button class="modal-close" onclick="closeSignUpModal()">&times;</button>
-            <h2 class="modal-title"><i class="fas fa-user-plus" style="margin-right: 10px;"></i>Create Account</h2>
+            <h2 class="modal-title"><i class="fas fa-user-plus" style="margin-right: 10px;"></i>Create Your SoCl Account</h2>
             <form id="signupForm" onsubmit="handleSignUp(event)">
                 <div class="form-group">
                     <label>Full Name</label>
@@ -624,12 +1624,367 @@
                     <label>Password</label>
                     <input type="password" required placeholder="••••••••">
                 </div>
-                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Register</button>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Create Account</button>
             </form>
         </div>
     </div>
 
+    <!-- SIGN IN MODAL -->
+    <div class="modal-overlay" id="signinModal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeSignInModal()">&times;</button>
+            <h2 class="modal-title"><i class="fas fa-sign-in-alt" style="margin-right: 10px;"></i>Sign In</h2>
+            <form id="signinForm" onsubmit="handleSignInSubmit(event)">
+                <div class="form-group">
+                    <label>Email Address or Admin Username</label>
+                    <input type="text" id="signinEmail" required placeholder="email@university.edu or admin">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="signinPassword" required placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%; margin-top: 10px;">Login</button>
+                <div id="signinError" style="color: red; font-size: 0.85rem; margin-top: 10px; display: none;"></div>
+            </form>
+        </div>
+    </div>
+
+    <!-- COMPONENT LIBRARY MODAL -->
+    <div class="modal-overlay" id="compModal">
+        <div class="modal-content" style="max-width: 1060px; max-height: 88vh; overflow-y: auto; padding: 30px 34px;">
+            <button class="modal-close" onclick="closeCompModal()">&times;</button>
+            <h2 class="modal-title"><i class="fas fa-microchip" style="margin-right: 10px;"></i> Embroidered Passive Component Models</h2>
+            <p style="margin-top: -8px; margin-bottom: 12px; color: #6c757d; font-size: 0.95rem;">
+                Mathematical design models for the SoCl embroidered resistor, capacitor, and inductor. These are first-order layout estimates; final values should be verified by measurement because textile geometry, stitch density, thread tension, humidity, and substrate thickness affect the real component.
+            </p>
+            <p style="margin: 0 0 20px 0; padding: 10px 12px; background: #fff7ed; border: 1px solid #fed7aa; border-radius: 8px; color: #7c2d12; font-size: 0.88rem;">
+                <strong>PNG image slots:</strong> Put your PNG files in an <code>images</code> folder beside this HTML file, or change each <code>src</code> path below to match your own filenames.
+            </p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(305px, 1fr)); gap: 18px;">
+
+                <!-- Embroidered Resistor -->
+                <div style="background: #ffffff; border: 1px solid #e9ecef; border-radius: 10px; overflow: hidden; box-shadow: var(--card-shadow);">
+                    <div style="padding: 14px 16px; background: #fff7ed; border-bottom: 1px solid #fed7aa;">
+                        <h3 style="margin: 0; color: var(--brand-blue); font-size: 1.05rem;">
+                            <i class="fas fa-wave-square" style="color: var(--brand-accent); width: 22px;"></i> Embroidered Resistor
+                        </h3>
+                    </div>
+
+                    <div style="padding: 16px;">
+                        <div style="width: 100%; min-height: 170px; background: #f8f9fa; border: 1px dashed #bdc3c7; border-radius: 8px; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                            <img src="images/embroidered-resistor-model.png" alt="PNG image of embroidered resistor model" style="width: 100%; height: 100%; max-height: 220px; object-fit: contain; display: block;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display: none; width: 100%; min-height: 170px; align-items: center; justify-content: center; text-align: center; padding: 18px; color: #6c757d; font-size: 0.9rem;">
+                                Add your PNG here:<br><strong>images/embroidered-resistor-model.png</strong>
+                            </div>
+                        </div>
+
+                        <p style="font-size: 0.88rem; color: #6c757d; margin: 0 0 12px 0;">
+                            The resistor is modeled as a long conductive-thread path. In the EDA code, the parameter named <strong>rho</strong> is used as <strong>linear thread resistance</strong> in &Omega;/m, not bulk resistivity.
+                        </p>
+
+                        <div style="background: #f8f9fa; border-left: 4px solid var(--brand-accent); padding: 10px 12px; border-radius: 6px; font-size: 0.9rem;">
+                            <strong>Electrical model</strong><br>
+                            <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.05rem;">
+                                R = R<sub>L</sub> L<sub>thread</sub><br>
+                                L<sub>thread</sub> = R<sub>target</sub> / R<sub>L</sub><br>
+                                P = I<sup>2</sup>R = V<sup>2</sup>/R
+                            </span>
+                        </div>
+
+                        <div style="font-size: 0.86rem; margin-top: 12px; color: var(--text-main);">
+                            <strong>Parameters</strong><br>
+                            R<sub>target</sub>: desired resistance (&Omega;)<br>
+                            R<sub>L</sub>: linear thread resistance (&Omega;/m)<br>
+                            L<sub>thread</sub>: total stitched length (m)<br>
+                            w: stitch/thread width (mm), affects routing area and current capacity<br>
+                            pad size / pad gap: connection geometry used by the DST path<br>
+                            <strong>Code relation:</strong> <code>total_length = (R / rho) * 1000</code> gives length in mm.<br>
+                            <strong>Design rule:</strong> increasing stitched length increases R; using a lower &Omega;/m thread decreases R.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Embroidered Capacitor -->
+                <div style="background: #ffffff; border: 1px solid #e9ecef; border-radius: 10px; overflow: hidden; box-shadow: var(--card-shadow);">
+                    <div style="padding: 14px 16px; background: #eff6ff; border-bottom: 1px solid #bfdbfe;">
+                        <h3 style="margin: 0; color: var(--brand-blue); font-size: 1.05rem;">
+                            <i class="fas fa-align-justify" style="color: #0d6efd; width: 22px;"></i> Embroidered Capacitor
+                        </h3>
+                    </div>
+
+                    <div style="padding: 16px;">
+                        <div style="width: 100%; min-height: 170px; background: #f8f9fa; border: 1px dashed #bdc3c7; border-radius: 8px; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                            <img src="images/embroidered-capacitor-model.png" alt="PNG image of embroidered capacitor model" style="width: 100%; height: 100%; max-height: 220px; object-fit: contain; display: block;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display: none; width: 100%; min-height: 170px; align-items: center; justify-content: center; text-align: center; padding: 18px; color: #6c757d; font-size: 0.9rem;">
+                                Add your PNG here:<br><strong>images/embroidered-capacitor-model.png</strong>
+                            </div>
+                        </div>
+
+                        <p style="font-size: 0.88rem; color: #6c757d; margin: 0 0 12px 0;">
+                            The capacitor is a planar interdigitated structure. Capacitance increases with finger count, finger overlap length, thread width, and fabric relative permittivity; it decreases as spacing increases.
+                        </p>
+
+                        <div style="background: #f8f9fa; border-left: 4px solid #0d6efd; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem;">
+                            <strong>Approximate model used for layout estimates</strong><br>
+                            <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.05rem;">
+                                C &approx; &epsilon;<sub>0</sub>&epsilon;<sub>r</sub> [(2w + s)L/s](N - 1)<br>
+                                C<sub>pF</sub> &approx; 0.008854&nbsp;&epsilon;<sub>r</sub> [(2w + s)L/s](N - 1)
+                            </span>
+                        </div>
+
+                        <div style="font-size: 0.86rem; margin-top: 12px; color: var(--text-main);">
+                            <strong>Parameters</strong><br>
+                            N: number of interdigitated fingers<br>
+                            L: finger overlap length (mm)<br>
+                            w: conductive stitch/thread width (mm)<br>
+                            s: gap between neighboring fingers (mm)<br>
+                            &epsilon;<sub>0</sub>: 8.854&times;10<sup>-12</sup> F/m<br>
+                            &epsilon;<sub>r</sub>: fabric/substrate relative permittivity<br>
+                            <strong>Current defaults in your generator:</strong> w &approx; 0.40 mm, s = 0.70 mm, &epsilon;<sub>r</sub> = 1.5.<br>
+                            <strong>Code relation:</strong> use <code>0.008854187817</code> for pF when geometry is in mm.<br>
+                            <strong>Design rule:</strong> larger N and L increase C; larger s decreases C.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Embroidered Inductor -->
+                <div style="background: #ffffff; border: 1px solid #e9ecef; border-radius: 10px; overflow: hidden; box-shadow: var(--card-shadow);">
+                    <div style="padding: 14px 16px; background: #eef2ff; border-bottom: 1px solid #c7d2fe;">
+                        <h3 style="margin: 0; color: var(--brand-blue); font-size: 1.05rem;">
+                            <i class="fas fa-border-all" style="color: #4f46e5; width: 22px;"></i> Embroidered Inductor
+                        </h3>
+                    </div>
+
+                    <div style="padding: 16px;">
+                        <div style="width: 100%; min-height: 170px; background: #f8f9fa; border: 1px dashed #bdc3c7; border-radius: 8px; margin-bottom: 14px; display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative;">
+                            <img src="images/embroidered-inductor-model.png" alt="PNG image of embroidered inductor model" style="width: 100%; height: 100%; max-height: 220px; object-fit: contain; display: block;" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                            <div style="display: none; width: 100%; min-height: 170px; align-items: center; justify-content: center; text-align: center; padding: 18px; color: #6c757d; font-size: 0.9rem;">
+                                Add your PNG here:<br><strong>images/embroidered-inductor-model.png</strong>
+                            </div>
+                        </div>
+
+                        <p style="font-size: 0.88rem; color: #6c757d; margin: 0 0 12px 0;">
+                            The inductor is modeled as a planar square spiral. The placement prompt asks for turn count; trace width, spacing, and inner opening are fixed defaults in the generator.
+                        </p>
+
+                        <div style="background: #f8f9fa; border-left: 4px solid #4f46e5; padding: 10px 12px; border-radius: 6px; font-size: 0.9rem;">
+                            <strong>Modified Wheeler model</strong><br>
+                            <span style="font-family: Georgia, 'Times New Roman', serif; font-size: 1.05rem;">
+                                L = [2.34&mu;<sub>0</sub>N<sup>2</sup>d<sub>avg</sub>] / [1 + 2.75&rho;<sub>fill</sub>]<br>
+                                d<sub>out</sub> = d<sub>in</sub> + 2[Nw + (N - 1)s]<br>
+                                d<sub>avg</sub> = (d<sub>out</sub> + d<sub>in</sub>)/2<br>
+                                &rho;<sub>fill</sub> = (d<sub>out</sub> - d<sub>in</sub>)/(d<sub>out</sub> + d<sub>in</sub>)
+                            </span>
+                        </div>
+
+                        <div style="font-size: 0.86rem; margin-top: 12px; color: var(--text-main);">
+                            <strong>Parameters</strong><br>
+                            N: number of turns<br>
+                            w: conductive thread/trace width (mm)<br>
+                            s: spacing between turns (mm)<br>
+                            d<sub>in</sub>: inner square opening/diameter (mm)<br>
+                            d<sub>out</sub>: outer square side/diameter (mm)<br>
+                            d<sub>avg</sub>: convert from mm to m before calculating H<br>
+                            &mu;<sub>0</sub>: 4&pi;&times;10<sup>-7</sup> H/m<br>
+                            <strong>Current defaults in your generator:</strong> w = 0.20 mm, s = 0.60 mm, d<sub>in</sub> = 4.0 mm.<br>
+                            <strong>Code relation:</strong> <code>L_nH = L_henries * 1e9</code> after converting <code>d_avg</code> from mm to m.<br>
+                            <strong>Design rule:</strong> increasing N and d<sub>avg</sub> increases L, but also increases series resistance and parasitic capacitance.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px; padding: 14px 16px; background: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; font-size: 0.9rem; color: #495057;">
+                <strong>SoCl calculation check:</strong> Resistor length uses <em>R / R<sub>L</sub></em>. Capacitor pF calculation must use <em>0.008854</em> when geometry is in millimeters. Inductor calculation must convert <em>d<sub>avg</sub></em> from mm to meters before using the Wheeler equation.
+            </div>
+        </div>
+    </div>
+    
     <script>
+        // --- REAL DATABASE AUTHENTICATION & TRACKING LOGIC ---
+        let currentUser = null; 
+
+        // Local demo/admin login for offline testing. For production, move credentials to the backend.
+        const ADMIN_USERNAME = "admin";
+        const ADMIN_PASSWORD = "w1wUVA";
+
+        const allowedDomainsRegex = /^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.edu|[a-zA-Z0-9.-]+\.org|virginia\.edu)$/i;
+        const blockedDomains = ["mailinator.com", "tempmail.com", "10minutemail.com", "guerrillamail.com"];
+
+        // --- TECHNICAL PREVIEW AUTO-SLIDESHOW ---
+        let currentPreviewSlide = 0;
+        let previewCarouselTimer = null;
+
+        function showPreviewSlide(index) {
+            const slides = document.querySelectorAll('.preview-slide');
+            const dots = document.querySelectorAll('.preview-dot');
+            const caption = document.getElementById('previewCaption');
+            if (!slides.length) return;
+
+            currentPreviewSlide = (index + slides.length) % slides.length;
+
+            slides.forEach((slide, slideIndex) => {
+                slide.classList.toggle('active', slideIndex === currentPreviewSlide);
+            });
+
+            dots.forEach((dot, dotIndex) => {
+                dot.classList.toggle('active', dotIndex === currentPreviewSlide);
+            });
+
+            if (caption) {
+                caption.textContent = slides[currentPreviewSlide].getAttribute('data-caption') || `Preview ${currentPreviewSlide + 1}`;
+            }
+        }
+
+        function nextPreviewSlide() {
+            showPreviewSlide(currentPreviewSlide + 1);
+        }
+
+        function startPreviewCarousel() {
+            const slides = document.querySelectorAll('.preview-slide');
+            if (!slides.length) return;
+            stopPreviewCarousel();
+            previewCarouselTimer = setInterval(nextPreviewSlide, 10000);
+        }
+
+        function stopPreviewCarousel() {
+            if (previewCarouselTimer) {
+                clearInterval(previewCarouselTimer);
+                previewCarouselTimer = null;
+            }
+        }
+
+        function isValidAcademicEmail(email) {
+            const parts = email.split('@');
+            if (parts.length !== 2 || !parts[1]) return false;
+            const domain = parts[1].toLowerCase();
+            if (blockedDomains.includes(domain)) return false;
+            return allowedDomainsRegex.test(email);
+        }
+
+        async function logSystemEvent(eventType, eventData = {}) {
+            if (!currentUser || !currentUser.id) return;
+            try {
+                await fetch('http://127.0.0.1:5000/track-event', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId: currentUser.id, eventType: eventType, eventData: eventData })
+                });
+            } catch (err) { console.warn("Tracking failed.", err); }
+        }
+
+        // --- Authentication Guard ---
+        function requireAuth(tabId) {
+            if (!currentUser || !currentUser.id) {
+                alert("Authentication Required: Please sign in or create an account to access the engineering tools.");
+                handleSignIn(); 
+            } else {
+                switchTab(tabId);
+            }
+        }
+
+        function handleSignIn() { document.getElementById('signinModal').style.display = 'flex'; }
+        function closeSignInModal() { document.getElementById('signinModal').style.display = 'none'; document.getElementById('signinError').style.display = 'none'; }
+        function openSignUpModal() { document.getElementById('signupModal').style.display = 'flex'; }
+        function closeSignUpModal() { document.getElementById('signupModal').style.display = 'none'; }
+        function openComponentLibrary() {
+            switchTab('componentLibrary');
+            showComponentModel('resistor');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showComponentModel(componentName) {
+            document.querySelectorAll('.component-detail-page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.component-tab').forEach(tab => tab.classList.remove('active'));
+
+            const page = document.getElementById(`component-${componentName}`);
+            const tab = document.querySelector(`[data-component-tab="${componentName}"]`);
+            if (page) page.classList.add('active');
+            if (tab) tab.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Backward compatibility: older buttons now open the page-based component library instead of a modal.
+        function openCompModal() { openComponentLibrary(); }
+        function closeCompModal() {
+            const modal = document.getElementById('compModal');
+            if (modal) modal.style.display = 'none';
+        }
+
+        async function handleSignUp(event) {
+            event.preventDefault(); 
+            const nameInput = event.target.querySelector('input[type="text"]').value;
+            const emailInput = event.target.querySelector('input[type="email"]').value;
+            const passwordInput = event.target.querySelector('input[type="password"]').value;
+
+            if (!isValidAcademicEmail(emailInput)) {
+                alert("Access Denied: Please use a valid university (.edu), organization (.org), or virginia.edu email address.");
+                return;
+            }
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ fullName: nameInput, email: emailInput, password: passwordInput })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    alert("Account created successfully! You can now log in.");
+                    closeSignUpModal();
+                    document.getElementById('signupForm').reset();
+                } else {
+                    alert("Registration failed: " + data.error);
+                }
+            } catch (err) {
+                alert("Server error. Make sure your Python backend is running.");
+            }
+        }
+
+        async function handleSignInSubmit(event) {
+            event.preventDefault();
+            const emailInput = document.getElementById('signinEmail').value.trim();
+            const passwordInput = document.getElementById('signinPassword').value;
+            const errorDiv = document.getElementById('signinError');
+
+            // Built-in admin login for local/demo access without the Python backend.
+            if (emailInput.toLowerCase() === ADMIN_USERNAME && passwordInput === ADMIN_PASSWORD) {
+                currentUser = { id: "admin-local", name: "Admin", email: "admin@socl.local", role: "admin" };
+                errorDiv.style.display = 'none';
+                closeSignInModal();
+                document.getElementById('signinForm').reset();
+                alert("Welcome back, Admin!");
+                switchTab('tool');
+                return;
+            }
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: emailInput, password: passwordInput })
+                });
+                const data = await response.json();
+                if (response.ok) {
+                    currentUser = data.user; 
+                    errorDiv.style.display = 'none';
+                    closeSignInModal();
+                    document.getElementById('signinForm').reset();
+                    alert(`Welcome back, ${currentUser.name}!`);
+                    
+                    // Route them to the tool upon successful login
+                    switchTab('tool'); 
+                } else {
+                    errorDiv.innerText = data.error;
+                    errorDiv.style.display = 'block';
+                }
+            } catch (err) {
+                errorDiv.innerText = "Cannot connect to server. Ensure app.py is running.";
+                errorDiv.style.display = 'block';
+            }
+        }
+
         // --- Tab Switching Logic ---
         function switchTab(tabId) {
             document.querySelectorAll('.page-section').forEach(section => section.classList.remove('active'));
@@ -646,27 +2001,6 @@
             }
             
             if (tabId === 'tool') setTimeout(resize, 50); 
-        }
-
-        // --- Auth Logic (Simulated) ---
-        function handleSignIn() {
-            // Direct user to EDA workspace upon simulated login
-            switchTab('tool');
-        }
-
-        function openSignUpModal() {
-            document.getElementById('signupModal').style.display = 'flex';
-        }
-
-        function closeSignUpModal() {
-            document.getElementById('signupModal').style.display = 'none';
-        }
-
-        function handleSignUp(event) {
-            event.preventDefault(); // Prevent page reload
-            alert("Account Information Collected!\n\n(Database integration pending in future updates)");
-            closeSignUpModal();
-            document.getElementById('signupForm').reset();
         }
 
         // --- EDA Canvas Logic ---
@@ -813,41 +2147,92 @@
                         if(i % 2 !== 0) { path_upper.push([x, upper_base_y - l]); path_upper.push([x, upper_base_y]); }
                     }
                     raw_paths.push(path_lower); raw_paths.push(path_upper);
-                    let cap = ((8.854 * permittivity * (2 * width + spacing) * l) / spacing) * (t - 1);
+                    let cap = ((0.008854187817 * permittivity * (2 * width + spacing) * l) / spacing) * (t - 1);
                     this.customGeo.label = cap.toFixed(2) + " pF";
                     this.customGeo.snapPoints.push([pad_x + pad_width/2, pad_y_lower + pad_height/2]);
                     this.customGeo.snapPoints.push([pad_x + pad_width/2, pad_y_upper + pad_height/2]);
                 } else if (this.type === "EmbL") {
+                    
+                    // --- NEW RF CENTER-PAD INDUCTOR GEOMETRY ---
                     let turns = this.params.turns || 5;
-                    let side = this.params.side || 20;
-                    let spacing = this.params.spacing || 1.5;
-                    let lead = 4;
-                    let left = -side / 2, right = side / 2, top = -side / 2, bottom = side / 2;
-                    let path = [[left - lead, top], [left, top]];
+                    let w = 0.20;           // Fixed Thread diameter (mm)
+                    let s = 0.60;           // Fixed Spacing (mm)
+                    let d_in = 4.0;         // Inner clearance for pad
+                    let center_pad = 1.5;   // Center Pad anchor size
 
-                    for (let i = 0; i < turns; i++) {
-                        if (right <= left || bottom <= top) break;
-                        path.push([right, top]);
-                        path.push([right, bottom]);
-                        path.push([left, bottom]);
+                    // Geometry calc
+                    const side_traces_width = (turns * w) + ((turns - 1) * s);
+                    const d_out = d_in + (2 * side_traces_width);
+                    
+                    // Inductance math for Label
+                    const d_avg = (d_out + d_in) / 2;
+                    const rho = (d_out - d_in) / (d_out + d_in);
+                    const mu0 = 4 * Math.PI * 1e-7;
+                    const L_henries = (2.34 * mu0 * Math.pow(turns, 2) * (d_avg * 1e-3)) / (1 + 2.75 * rho);
+                    const L_nH = L_henries * 1e9;
 
-                        left += spacing;
-                        top += spacing;
-                        if (right <= left || bottom <= top) break;
+                    const pad_w = 2.54; 
+                    const pad_h = 1.14; 
+                    const pad_gap = 2.03; 
+                    const pad_clearance = 2.0; 
 
-                        path.push([left, top]);
-                        right -= spacing;
-                        bottom -= spacing;
+                    const startL = d_out;
+                    const pitch = w + s; 
+
+                    const padY = (startL/2) + pad_clearance;
+                    const pad_cy = padY + (pad_h/2);
+                    
+                    const pad1_cx = -pad_gap/2 - pad_w/2;
+                    const pad2_cx = pad_gap/2 + pad_w/2;
+
+                    let path = [];
+                    const safe_route_y = (startL/2) + pad_clearance * 0.5;
+                    
+                    let x = -startL/2;
+                    let y = startL/2;
+
+                    // Route from Pad 1 up to start of spiral
+                    path.push([pad1_cx, pad_cy]);
+                    path.push([pad1_cx, safe_route_y]);
+                    path.push([x, safe_route_y]);
+                    path.push([x, y]);
+
+                    let current_L = startL;
+                    let dir = 0; 
+                    
+                    for (let i = 0; i < turns * 4; i++) {
+                        if (i > 0 && i % 2 === 0) current_L -= pitch;
+                        
+                        if (dir === 0) y -= current_L;
+                        else if (dir === 1) x += current_L;
+                        else if (dir === 2) y += current_L;
+                        else if (dir === 3) x -= current_L;
+                        
+                        path.push([x, y]);
+                        dir = (dir + 1) % 4;
+                    }
+                    
+                    path.push([0, 0]); // Terminate precisely at center pad
+                    raw_paths.push(path);
+
+                    // Cross-hatch solid fill paths for DST Export Pads
+                    let step = w * 0.5; // dense fill
+                    function fillPad(cx, cy, pw, ph) {
+                        let px = cx - pw/2, py = cy - ph/2;
+                        for (let lx = px; lx <= px + pw + 0.001; lx += step) raw_paths.push([[lx, py], [lx, py + ph]]);
+                        for (let ly = py; ly <= py + ph + 0.001; ly += step) raw_paths.push([[px, ly], [px + pw, ly]]);
                     }
 
-                    let last = path[path.length - 1];
-                    path.push([last[0] + lead, last[1]]);
+                    fillPad(pad1_cx, pad_cy, pad_w, pad_h);
+                    fillPad(pad2_cx, pad_cy, pad_w, pad_h); // Isolated Pad 2 for Jumper wire
+                    fillPad(0, 0, center_pad, center_pad);
 
-                    raw_paths.push(path);
-                    this.customGeo.label = turns + "T";
-                    this.customGeo.snapPoints.push(path[0]);
-                    this.customGeo.snapPoints.push(path[path.length - 1]);
+                    this.customGeo.label = L_nH.toFixed(1) + " nH";
+                    this.customGeo.snapPoints.push([pad1_cx, pad_cy]);
+                    this.customGeo.snapPoints.push([pad2_cx, pad_cy]);
+                    this.customGeo.snapPoints.push([0, 0]);
                 }
+                
                 if (raw_paths.length > 0) {
                     let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
                     raw_paths.forEach(path => path.forEach(p => { if (p[0] < minX) minX = p[0]; if (p[0] > maxX) maxX = p[0]; if (p[1] < minY) minY = p[1]; if (p[1] > maxY) maxY = p[1]; }));
@@ -872,7 +2257,7 @@
                         ctx.strokeRect(p.rel[0] - p.size[0]/2, p.rel[1] - p.size[1]/2, p.size[0], p.size[1]);
                     }
                 } else if (this.isCustom && this.customGeo && this.customGeo.paths) {
-                    ctx.strokeStyle = isSel ? CONFIG.COLORS.SELECTED : (this.type==="EmbR" ? "red" : (this.type==="EmbC" ? "blue" : "purple")); 
+                    ctx.strokeStyle = isSel ? CONFIG.COLORS.SELECTED : (this.type==="EmbR" ? "red" : (this.type==="EmbC" ? "blue" : "#0d6efd")); 
                     ctx.lineWidth = 0.3;
                     for (let path of this.customGeo.paths) {
                         if (path.length === 0) continue;
@@ -1003,7 +2388,7 @@
                 
                 if (typeStr === 'EmbR') {
                     let uR = prompt("Enter Resistance (Ohms):", "300"); 
-                    let uRho = prompt("Enter Resistivity (Ohms/m):", "300");
+                    let uRho = prompt("Enter Linear Thread Resistance (Ohms/m):", "300");
                     if (uR && uRho) { 
                         params.R = parseFloat(uR); 
                         params.rho = parseFloat(uRho); 
@@ -1022,19 +2407,27 @@
                         state.tool = 'select'; document.querySelector('[data-tool="select"]').click(); return; 
                     }
                 } else if (typeStr === 'EmbL') {
-                    let uT = prompt("Enter Number of Turns:", "5");
-                    let uSide = prompt("Enter Outer Side Length (mm):", "20");
-                    let uSpacing = prompt("Enter Trace Spacing (mm):", "1.5");
-                    if (uT && uSide && uSpacing) {
+                    // --- ONLY ASK FOR TURNS ---
+                    let uT = prompt("Enter Number of Turns for RF Inductor:", "5");
+                    if (uT) {
                         params.turns = parseInt(uT);
-                        params.side = parseFloat(uSide);
-                        params.spacing = parseFloat(uSpacing);
                     } else {
                         state.tool = 'select'; document.querySelector('[data-tool="select"]').click(); return;
                     }
                 }
                 
-                state.components.push(new Component(`${prefix}${num}`, typeStr, [sX, sY], params)); document.querySelector('[data-tool="select"]').click();
+                state.components.push(new Component(`${prefix}${num}`, typeStr, [sX, sY], params)); 
+                
+                // --- TRACKING COMPONENT PLACEMENT ---
+                logSystemEvent("PLACE_COMPONENT", {
+                    componentType: typeStr,
+                    parameters: params,
+                    x_pos: sX,
+                    y_pos: sY
+                });
+
+                document.querySelector('[data-tool="select"]').click();
+
             } else if (state.tool === 'route') {
                 const routeNode = getSnappedRouteNode(wX, wY); 
                 if (!state.routingStartNode) { state.routingStartNode = routeNode; } 
@@ -1111,7 +2504,15 @@
                 }
                 const blob = await response.blob(); const url = window.URL.createObjectURL(blob);
                 const a = document.createElement('a'); a.href = url; a.download = "layout_export.dst"; document.body.appendChild(a); a.click(); window.URL.revokeObjectURL(url);
-                updateStatus(); alert("Export Successful!");
+                
+                // --- TRACKING EXPORT ---
+                logSystemEvent("EXPORT_DST", {
+                    componentCount: state.components.length,
+                    traceCount: state.traces.length,
+                    gridSizeUsed: CONFIG.GRID_MM
+                });
+
+                updateStatus(); alert("DST export successful!");
             } catch (err) { 
                 let msg = err.message;
                 if (msg === "Failed to fetch") {
@@ -1170,6 +2571,10 @@
             }
         });
 
+        // Start the SoCl technical preview slideshow; each image changes every 10 seconds.
+        showPreviewSlide(0);
+        startPreviewCarousel();
+
         // UPGRADE: Force board origin to top-left corner instead of arbitrary center calculation
         resize();
         state.offsetX = 20; 
@@ -1177,4 +2582,5 @@
         render();
     </script>
 </body>
+</html>
 </html>
