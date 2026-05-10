@@ -1,15 +1,129 @@
-from flask import Flask, request, send_file
+from flask import Flask, request, send_file, jsonify
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
 import pyembroidery
 import io
 import math
 import numpy as np
 import cv2  # OpenCV for the Image-to-DST converter
+import sqlite3
+import json
+import datetime
 
 app = Flask(__name__)
 CORS(app) 
 
-# --- Exact constants ported from your pCB_Final_Version.py ---
+# -------------------------------------------------------------------------
+# DATABASE SETUP & INITIALIZATION
+# -------------------------------------------------------------------------
+DB_FILE = 'wearlab.db'
+
+def init_db():
+    """Creates the secure database and tables if they don't exist yet."""
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    
+    # Table for Users (Passwords are hashed, never plain text)
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            full_name TEXT NOT NULL,
+            email TEXT UNIQUE NOT NULL,
+            password_hash TEXT NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    ''')
+    
+    # Master Table for tracking tool usage (Flexible JSON payload)
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS event_logs (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            event_type TEXT NOT NULL,
+            event_data TEXT,
+            timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY(user_id) REFERENCES users(id)
+        )
+    ''')
+    
+    conn.commit()
+    conn.close()
+
+# Initialize the database when the server starts
+init_db()
+
+# -------------------------------------------------------------------------
+# AUTHENTICATION & TRACKING API ENDPOINTS
+# -------------------------------------------------------------------------
+
+@app.route('/register', methods=['POST'])
+def register():
+    data = request.json
+    name = data.get('fullName')
+    email = data.get('email').lower() 
+    password = data.get('password')
+    
+    if not name or not email or not password:
+        return jsonify({"error": "Missing required fields"}), 400
+
+    hashed_pw = generate_password_hash(password, method='pbkdf2:sha256')
+    
+    try:
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+        cursor.execute("INSERT INTO users (full_name, email, password_hash) VALUES (?, ?, ?)", 
+                       (name, email, hashed_pw))
+        conn.commit()
+        return jsonify({"message": "User created successfully"}), 201
+    except sqlite3.IntegrityError:
+        return jsonify({"error": "Email is already registered"}), 409
+    finally:
+        conn.close()
+
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    email = data.get('email').lower()
+    password = data.get('password')
+    
+    conn = sqlite3.connect(DB_FILE)
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, full_name, password_hash FROM users WHERE email = ?", (email,))
+    user = cursor.fetchone()
+    conn.close()
+    
+    if user and check_password_hash(user[2], password):
+        return jsonify({
+            "message": "Login successful",
+            "user": {"id": user[0], "name": user[1], "email": email}
+        }), 200
+    else:
+        return jsonify({"error": "Invalid email or password"}), 401
+
+@app.route('/track-event', methods=['POST'])
+def track_event():
+    data = request.json
+    user_id = data.get('userId')
+    event_type = data.get('eventType')
+    event_data = json.dumps(data.get('eventData', {})) 
+    
+    if user_id and event_type:
+        conn = sqlite3.connect(DB_FILE)
+        cursor = conn.cursor()
+        cursor.execute('''
+            INSERT INTO event_logs (user_id, event_type, event_data) 
+            VALUES (?, ?, ?)
+        ''', (user_id, event_type, event_data))
+        conn.commit()
+        conn.close()
+        return jsonify({"status": "logged"}), 200
+        
+    return jsonify({"error": "Missing user or event type"}), 400
+
+
+# -------------------------------------------------------------------------
+# EXACT EMBROIDERY CONSTANTS & FUNCTIONS (From Original Code)
+# -------------------------------------------------------------------------
 TRACE_STITCH_LENGTH_MM = 1.25
 PAD_STITCH_LENGTH_MM = 0.75
 
@@ -227,6 +341,86 @@ def generate_capacitor_geometry(turns, length, spacing, thread_diameter=0.2, sti
     return [remove_duplicates(centered_lower), remove_duplicates(centered_upper)], centered_pads
 
 
+def generate_inductor_geometry(turns, stitch_spacing=1.25):
+    w = 0.20           # Thread diameter
+    s = 0.60           # Spacing
+    d_in = 4.0         # Inner clearance
+    center_pad = 1.5   # Center pad size
+
+    side_traces_width = (turns * w) + ((turns - 1) * s)
+    d_out = d_in + (2 * side_traces_width)
+    
+    pad_w = 2.54 
+    pad_h = 1.14 
+    pad_gap = 2.03 
+    pad_clearance = 2.0 
+
+    startL = d_out
+    pitch = w + s 
+
+    padY = (startL/2) + pad_clearance
+    pad_cy = padY + (pad_h/2)
+    
+    pad1_cx = -pad_gap/2 - pad_w/2
+    pad2_cx = pad_gap/2 + pad_w/2
+
+    safe_route_y = (startL/2) + pad_clearance * 0.5
+    x = -startL/2
+    y = startL/2
+
+    # Corner routing sequence
+    corners = [
+        (pad1_cx, pad_cy),
+        (pad1_cx, safe_route_y),
+        (x, safe_route_y),
+        (x, y)
+    ]
+
+    current_L = startL
+    dir_idx = 0 
+    
+    for i in range(turns * 4):
+        if i > 0 and i % 2 == 0:
+            current_L -= pitch
+            
+        if dir_idx == 0: y -= current_L
+        elif dir_idx == 1: x += current_L
+        elif dir_idx == 2: y += current_L
+        elif dir_idx == 3: x -= current_L
+        
+        corners.append((x, y))
+        dir_idx = (dir_idx + 1) % 4
+        
+    corners.append((0, 0))
+
+    interpolated_path = []
+    for i in range(len(corners) - 1):
+        interpolated_path.extend(get_line_stitches(corners[i][0], corners[i][1], corners[i+1][0], corners[i+1][1], stitch_spacing))
+
+    # Calculate bounding box for centering
+    all_pts_for_bounds = list(corners)
+    pads_info = [
+        (pad1_cx, pad_cy, pad_w, pad_h),
+        (pad2_cx, pad_cy, pad_w, pad_h),
+        (0, 0, center_pad, center_pad)
+    ]
+    
+    all_pts_for_bounds.append((pad1_cx - pad_w/2, pad_cy - pad_h/2))
+    all_pts_for_bounds.append((pad1_cx + pad_w/2, pad_cy + pad_h/2))
+    all_pts_for_bounds.append((pad2_cx - pad_w/2, pad_cy - pad_h/2))
+    all_pts_for_bounds.append((pad2_cx + pad_w/2, pad_cy + pad_h/2))
+    all_pts_for_bounds.append((-center_pad/2, -center_pad/2))
+    all_pts_for_bounds.append((center_pad/2, center_pad/2))
+
+    cx = (min(p[0] for p in all_pts_for_bounds) + max(p[0] for p in all_pts_for_bounds)) / 2
+    cy = (min(p[1] for p in all_pts_for_bounds) + max(p[1] for p in all_pts_for_bounds)) / 2
+
+    centered_path = [(p[0]-cx, p[1]-cy) for p in interpolated_path]
+    centered_pads = [(px-cx, py-cy, pw, ph) for px, py, pw, ph in pads_info]
+    
+    return [remove_duplicates(centered_path)], centered_pads
+
+
 def get_pad_fill_stitches(pos_x, pos_y, width, height, rot_rad, rel_x, rel_y, board_h):
     """Continuous Pad Fill: One single block to prevent needle jumps inside the pad"""
     hw, hh = width / 2.0, height / 2.0
@@ -339,7 +533,7 @@ def export_dst():
 
         pattern = pyembroidery.EmbPattern()
 
-        # EXACTLY 3 THREADS DEFINED
+        # EXACTLY 4 THREADS DEFINED
         green_thread = pyembroidery.EmbThread()
         green_thread.color = 0x00FF00
         green_thread.description = "Base Circuit"
@@ -351,10 +545,15 @@ def export_dst():
         blue_thread = pyembroidery.EmbThread()
         blue_thread.color = 0x0000FF
         blue_thread.description = "Capacitor Bodies"
+        
+        purple_thread = pyembroidery.EmbThread()
+        purple_thread.color = 0x800080
+        purple_thread.description = "Inductor Bodies"
 
         green_blocks = [] 
         red_blocks = []   
-        blue_blocks = []  
+        blue_blocks = []
+        purple_blocks = []
 
         for t in traces:
             sx, sy = t['startMm']
@@ -410,6 +609,32 @@ def export_dst():
                 blue_blocks.append(full_lower_path)
                 blue_blocks.append(full_upper_path)
 
+            elif c['type'] == 'EmbL':
+                turns = params.get('turns', 5)
+                bodies, pads = generate_inductor_geometry(turns)
+                
+                full_inductor_path = []
+                
+                # Assembly for Inductors: Pad 1 -> Spiral Body -> Center Pad
+                # 1. Left Pad (pad1)
+                px1, py1, pw1, ph1 = pads[0]
+                full_inductor_path.extend(get_pad_fill_stitches(pos_x, pos_y, pw1, ph1, rot_rad, px1, py1, board_h)[0])
+                
+                # 2. Spiral Body
+                full_inductor_path.extend(transform_path(bodies[0], pos_x, pos_y, cos_a, sin_a, board_h))
+                
+                # 3. Center Pad
+                pxC, pyC, pwC, phC = pads[2]
+                full_inductor_path.extend(get_pad_fill_stitches(pos_x, pos_y, pwC, phC, rot_rad, pxC, pyC, board_h)[0])
+
+                purple_blocks.append(full_inductor_path)
+
+                # Isolated Pad 2 (added separately so the machine initiates a jump to it)
+                isolated_pad2_path = []
+                px2, py2, pw2, ph2 = pads[1]
+                isolated_pad2_path.extend(get_pad_fill_stitches(pos_x, pos_y, pw2, ph2, rot_rad, px2, py2, board_h)[0])
+                purple_blocks.append(isolated_pad2_path)
+
             elif 'pads' in c:
                 for p in c['pads']:
                     green_blocks.extend(get_pad_fill_stitches(pos_x, pos_y, p['size'][0], p['size'][1], rot_rad, p['rel'][0], p['rel'][1], board_h))
@@ -429,6 +654,10 @@ def export_dst():
         # Phase 3: Capacitor Sensors (Blue) - Assembled Continuously
         if blue_blocks:
             add_blocks_as_single_color(merge_and_order_blocks(blue_blocks), pattern, blue_thread)
+            
+        # Phase 4: Inductor Sensors (Purple) - Assembled Continuously
+        if purple_blocks:
+            add_blocks_as_single_color(merge_and_order_blocks(purple_blocks), pattern, purple_thread)
                         
         out_file = io.BytesIO()
         pyembroidery.write_dst(pattern, out_file)
