@@ -1809,6 +1809,21 @@
         const ADMIN_USERNAME = "admin";
         const ADMIN_PASSWORD = "w1wUVA";
 
+        // --- BACKEND API CONFIGURATION ---
+        // Offline/local use keeps calling your Anaconda Flask server.
+        // Online GitHub Pages calls the deployed Render backend.
+        // After Render deploys, replace ONLINE_BACKEND_URL if Render gives you a different URL.
+        const ONLINE_BACKEND_URL = "https://socl-backend.onrender.com";
+        const API_BASE_URL = (() => {
+            const host = window.location.hostname;
+            const isLocal =
+                window.location.protocol === "file:" ||
+                host === "localhost" ||
+                host === "127.0.0.1";
+
+            return isLocal ? "http://127.0.0.1:5000" : ONLINE_BACKEND_URL;
+        })();
+
         const allowedDomainsRegex = /^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9.-]+\.edu|[a-zA-Z0-9.-]+\.org|virginia\.edu)$/i;
         const blockedDomains = ["mailinator.com", "tempmail.com", "10minutemail.com", "guerrillamail.com"];
 
@@ -1866,7 +1881,7 @@
         async function logSystemEvent(eventType, eventData = {}) {
             if (!currentUser || !currentUser.id) return;
             try {
-                await fetch('http://127.0.0.1:5000/track-event', {
+                await fetch(`${API_BASE_URL}/track-event`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ userId: currentUser.id, eventType: eventType, eventData: eventData })
@@ -1924,7 +1939,7 @@
             }
 
             try {
-                const response = await fetch('http://127.0.0.1:5000/register', {
+                const response = await fetch(`${API_BASE_URL}/register`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ fullName: nameInput, email: emailInput, password: passwordInput })
@@ -1960,7 +1975,7 @@
             }
 
             try {
-                const response = await fetch('http://127.0.0.1:5000/login', {
+                const response = await fetch(`${API_BASE_URL}/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email: emailInput, password: passwordInput })
@@ -2497,7 +2512,7 @@
             const status = document.getElementById('statusbar'); status.innerText = "Exporting... Please wait.";
             const payload = { components: state.components.map(c => ({ ref: c.ref, posMm: c.posMm, rotDeg: c.rotDeg, type: c.type, params: c.params, pads: c.fp ? c.fp.pads : [], customGeo: c.customGeo })), traces: state.traces.map(t => ({ startMm: t.getStartPt(), endMm: t.getEndPt() })) };
             try {
-                const response = await fetch('http://127.0.0.1:5000/export-dst', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+                const response = await fetch(`${API_BASE_URL}/export-dst`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 if (!response.ok) {
                     const errData = await response.json();
                     throw new Error(errData.error || "Server failed to export layout.");
@@ -2516,7 +2531,7 @@
             } catch (err) { 
                 let msg = err.message;
                 if (msg === "Failed to fetch") {
-                    msg = "Failed to fetch!\n\nThis means your HTML cannot connect to the Python backend.\n\nFIX:\n1. Open your Anaconda Prompt.\n2. Run: pip install opencv-python\n3. Start the server: python app.py\n4. Make sure it says 'Running on http://127.0.0.1:5000'";
+                    msg = "Failed to fetch!\n\nYour page cannot connect to the SoCl backend.\n\nOffline fix:\n1. Open Anaconda Prompt.\n2. Run: python app.py\n3. Keep http://127.0.0.1:5000 running.\n\nOnline fix:\nDeploy app.py on Render and make sure ONLINE_BACKEND_URL is correct.";
                 }
                 alert("Error during export: \n\n" + msg);
                 updateStatus(); 
@@ -2537,7 +2552,7 @@
             formData.append('image', file);
 
             try {
-                const response = await fetch('http://127.0.0.1:5000/convert-image', {
+                const response = await fetch(`${API_BASE_URL}/convert-image`, {
                     method: 'POST',
                     body: formData
                 });
@@ -2561,7 +2576,7 @@
             } catch (err) {
                 let msg = err.message;
                 if (msg === "Failed to fetch") {
-                    msg = "Failed to fetch!\n\nThis means your HTML cannot connect to the Python backend.\n\nFIX:\n1. Open your Anaconda Prompt.\n2. Run: pip install opencv-python\n3. Start the server: python app.py\n4. Make sure it says 'Running on http://127.0.0.1:5000'";
+                    msg = "Failed to fetch!\n\nYour page cannot connect to the SoCl backend.\n\nOffline fix:\n1. Open Anaconda Prompt.\n2. Run: python app.py\n3. Keep http://127.0.0.1:5000 running.\n\nOnline fix:\nDeploy app.py on Render and make sure ONLINE_BACKEND_URL is correct.";
                 }
                 alert("Error during conversion: \n\n" + msg);
             } finally {
