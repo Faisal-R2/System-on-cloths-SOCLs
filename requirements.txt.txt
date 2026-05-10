@@ -1,7 +1,0 @@
-Flask
-flask-cors
-gunicorn
-numpy
-opencv-python-headless
-pyembroidery
-Werkzeug
