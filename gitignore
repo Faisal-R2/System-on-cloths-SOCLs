@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Virtual environments
+venv/
+env/
+.venv/
+ENV/
+
+# Local database
+wearlab.db
+*.db
+*.sqlite
+*.sqlite3
+
+# Flask / local environment
+.env
+.env.*
+instance/
+.webassets-cache
+
+# Logs
+*.log
+logs/
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Render/local build artifacts
+.cache/
+build/
+dist/
